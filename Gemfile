@@ -7,6 +7,8 @@ ruby RUBY_VERSION
 gem "decidim", path: "."
 gem "decidim-consultations", path: "decidim-consultations"
 
+gem "bootsnap", "~> 1.3"
+
 gem "puma", "~> 3.0"
 gem "uglifier", "~> 4.1"
 
