@@ -6,22 +6,32 @@
   </div>
 
   <div class="card-section">
-    <div class="row column">
-      <%= form.text_field :full_name, autofocus: true %>
+    <div class="user-fields">
+      <div class="row column">
+        <%= form.select :existing_user, [[t(".non_user"), false], [t(".existing_user"), true]], label: t(".user_type") %>
+      </div>
+
+      <div class="row column user-fields--full-name">
+        <%= form.text_field :full_name, autofocus: true %>
+      </div>
+
+      <div class="row column user-fields--user-picker">
+        <% prompt_options = { url: users_assembly_members_url(assembly_slug: @current_assembly.slug), text: t(".select_user") }
+           options = { label: t(".user"), multiple: false } %>
+           <%= form.autocomplete_select(:user_id, form.object.user.presence, options, prompt_options) do |user|
+              { value: user.id, label: "#{user.name} (@#{user.nickname})" }
+            end %>
+      </div>
     </div>
 
-    <div class="row column">
-      <% picker_options = { id: "decidim_assemblies_assembly_members_user", class: "picker-multiple", name: "assembly_member[user_id]", multiple: false }
-         prompt_params= { url: users_assembly_members_url(assembly_slug: @current_assembly.slug), text: t(".select_user") } %>
-      <%= form.data_picker(:user, picker_options, prompt_params) {|item| { url: "users", text: "#{item.name} (@#{item.nickname})" }} %>
-    </div>
+    <div class="position-fields">
+      <div class="row column">
+        <%= form.select :position, @form.positions_for_select, { include_blank: t(".select_a_position") }, { multiple: false } %>
+      </div>
 
-    <div class="row column">
-      <%= form.select :position, @form.positions_for_select, { include_blank: t(".select_a_position") }, { multiple: false } %>
-    </div>
-
-    <div class="row column">
-      <%= form.text_field :position_other %>
+      <div class="row column position-fields--position-other">
+        <%= form.text_field :position_other %>
+      </div>
     </div>
 
     <div class="row column">

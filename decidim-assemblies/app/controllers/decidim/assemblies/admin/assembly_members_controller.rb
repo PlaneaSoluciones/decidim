@@ -77,10 +77,9 @@ module Decidim
 
         def users
           respond_to do |format|
-            format.html do
-              render partial: "users"
-            end
             format.json do
+              render json: [] && return if params.fetch(:term, "").empty?
+
               query = current_organization.users&.order(name: :asc)
               term = params[:term]
               if term&.start_with?("@")
@@ -89,7 +88,7 @@ module Decidim
               else
                 query = query.where("name ILIKE ?", "%#{params[:term]}%")
               end
-              render json: query.all.collect { |p| [p.id, p.name, p.nickname] }
+              render json: query.all.collect { |u| { value: u.id, label: "#{u.name} (@#{u.nickname})" } }
             end
           end
         end

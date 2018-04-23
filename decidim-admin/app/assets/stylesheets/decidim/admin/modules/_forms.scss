@@ -32,6 +32,10 @@ textarea{
   .check-radio-group{
     margin-bottom: 1rem;
 
+    legend{
+      font-weight: 600;
+    }
+
     .check-radio{
       margin-bottom: .5rem;
     }
@@ -39,6 +43,11 @@ textarea{
 
   label{
     font-weight: 600;
+  }
+
+  [type='checkbox'] + label[for],
+  [type='radio'] + label[for]{
+    font-weight: normal;
   }
 }
 

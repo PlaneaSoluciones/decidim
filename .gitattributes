@@ -2,3 +2,5 @@
 */vendor/* -text
 bundle.js binary
 CHANGELOG.md merge=union
+decidim-admin/app/assets/javascripts/decidim/admin/bundle.js filter=lfs diff=lfs merge=lfs -text
+decidim-admin/app/assets/stylesheets/decidim/admin/bundle.scss filter=lfs diff=lfs merge=lfs -text

@@ -19,15 +19,6 @@ module Decidim
           sign_in current_user
         end
 
-        describe
-
-        describe "GET users in html format" do
-          it "renders the data-picker user selector" do
-            get :users, format: :html, params: params
-            expect(response).to render_template("decidim/assemblies/admin/assembly_members/_users")
-          end
-        end
-
         describe "GET users in json format" do
           let(:user) { create(:user, organization: organization) }
 
@@ -42,7 +33,7 @@ module Decidim
             it "returns the id, name and nickname for filtered users" do
               params[:term] = user.name.to_s
               get :users, format: :json, params: params
-              expect(response.body).to eq([[user.id, user.name, user.nickname]].to_json)
+              expect(response.body).to eq([{ value: user.id, label: user.name, caption: "@#{user.nickname}" }].to_json)
             end
           end
 
@@ -50,7 +41,7 @@ module Decidim
             it "returns the id, name and nickname for filtered users" do
               params[:term] = "@#{user.nickname}"
               get :users, format: :json, params: params
-              expect(response.body).to eq([[user.id, user.name, user.nickname]].to_json)
+              expect(response.body).to eq([{ value: user.id, label: user.name, caption: "@#{user.nickname}" }].to_json)
             end
           end
         end
