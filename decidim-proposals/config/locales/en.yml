@@ -32,6 +32,7 @@ en:
             attachments_allowed: Allow attachments
             can_accumulate_supports_beyond_threshold: Can accumulate supports beyond threshold
             comments_enabled: Comments enabled
+            image_enabled: Image enabled
             geocoding_enabled: Geocoding enabled
             new_proposal_help_text: New proposal help text
             official_proposals_enabled: Official proposals enabled

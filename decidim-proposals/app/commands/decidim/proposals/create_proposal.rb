@@ -55,7 +55,8 @@ module Decidim
           component: form.component,
           address: form.address,
           latitude: form.latitude,
-          longitude: form.longitude
+          longitude: form.longitude,
+          image: form.image
         )
       end
 

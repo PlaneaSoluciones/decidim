@@ -15,11 +15,13 @@ module Decidim
         attribute :category_id, Integer
         attribute :scope_id, Integer
         attribute :attachment, AttachmentForm
+        attribute :image
 
         validates :title, :body, presence: true
         validates :address, geocoding: true, if: -> { current_component.settings.geocoding_enabled? }
         validates :category, presence: true, if: ->(form) { form.category_id.present? }
         validates :scope, presence: true, if: ->(form) { form.scope_id.present? }
+        validates :image, file_size: { less_than_or_equal_to: ->(_record) {Decidim.maximum_attachment_size } }, file_content_type: { allow: ["image/jpeg", "image/png"] }, if: -> { current_feature.settings.image_enabled? }
 
         validate :scope_belongs_to_participatory_space_scope
 

@@ -25,6 +25,8 @@ module Decidim
 
       validates :title, :body, presence: true
 
+      mount_uploader :image, Decidim::ImageUploader
+
       geocoded_by :address, http_headers: ->(proposal) { { "Referer" => proposal.component.organization.host } }
 
       scope :accepted, -> { where(state: "accepted") }
