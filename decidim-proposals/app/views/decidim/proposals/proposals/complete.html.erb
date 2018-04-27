@@ -15,6 +15,12 @@
             <%= form.text_area :body, rows: 10 %>
           </div>
 
+          <% if component_settings.image_enabled? %>
+            <div class="field">
+              <%= form.file_field :image %>
+            </div>
+          <% end %>
+
           <% if component_settings.geocoding_enabled? %>
             <div class="field">
               <%= form.check_box :has_address %>

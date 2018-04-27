@@ -57,7 +57,7 @@ module Decidim
             address: form.address,
             latitude: form.latitude,
             longitude: form.longitude,
-            form: form.image
+            image: form.image,
             published_at: Time.current
           }
         end
